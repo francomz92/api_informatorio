@@ -23,6 +23,7 @@ public class User {
    @NotNull
    @NotEmpty
    @Length(max = 25, message = "Máximo 25 caracteres")
+   @Column(unique = true)
    private String email;
    @NotNull
    @Length(min = 8, message = "Mínimo 8 caracteres")
