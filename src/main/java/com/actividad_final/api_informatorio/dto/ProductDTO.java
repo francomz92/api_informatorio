@@ -17,6 +17,7 @@ public class ProductDTO {
    private String body;
    private boolean isPublished;
 
+
    public ProductDTO () {}
 
 

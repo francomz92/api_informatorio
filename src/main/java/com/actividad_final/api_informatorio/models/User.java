@@ -37,7 +37,11 @@ public class User {
    @Length(max = 25, message = "Máximo 25 caracteres")
    private String country;
 
+
    public User() {}
+
+
+   // Getters
 
    public Long getId() {
       return id;
@@ -70,6 +74,8 @@ public class User {
    public String getCountry() {
       return country;
    }
+
+   // Setters
 
    public void setId(Long id) {
       this.id = id;

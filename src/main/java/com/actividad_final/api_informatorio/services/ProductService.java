@@ -7,6 +7,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProductService {
 
+   /*
+   *  updateProduct -> prepare date for product update
+   *  @param Product product
+   *  @param ProductDTO requestProductDTO
+   *     - String name
+   *     - String description
+   *     - String body
+   *     - BigDecimal utiPrice
+   *     - boolean isPublished
+   * */
    public void updatePreparation(Product product, ProductDTO requestProductDTO) {
       product.setName(requestProductDTO.getName());
       product.setUnitPrice(requestProductDTO.getUnitPrice());

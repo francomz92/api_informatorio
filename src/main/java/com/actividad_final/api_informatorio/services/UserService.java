@@ -24,7 +24,9 @@ public class UserService {
    *  filterUsers -> ResponseEntity whit data checked; filter by city or dates or both
    *  @param Optional<String> city
    *  @param Optional<String> requestStartDate
+   *     - format: dd-MM-yyyy
    *  @param Optional<String> requestEndDate
+   *     - format: dd-MM-yyyy
    * */
    public ResponseEntity<?> filterUsers(Optional<String> city, Optional<String> requestStartDate, Optional<String> requestEndDate) {
       if (requestStartDate.isEmpty() || requestEndDate.isEmpty()) {
@@ -41,6 +43,7 @@ public class UserService {
    /*
     *  startDateProssesing -> LocalDateTime with LocalTime at start of the day
     *  @param String requestDate
+ *       - format: dd-MM-yyyy
     */
    public LocalDateTime startDateProssesing(String requestDate) {
       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -50,6 +53,7 @@ public class UserService {
    /*
    *  endDateProssesing -> LocalDateTime with LocalTime at end of the day
    *  @param String requestData
+    *    - format: dd-MM-yyyy
    */
    public LocalDateTime endDateProssesing(String requestDate) {
       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -60,6 +64,11 @@ public class UserService {
    *  updatePreparation -> prepare data for user update
    *  @param User user
    *  @param UserDTO requestUserDTO
+   *     - String firstName
+   *     - String lastName
+   *     - String city
+   *     - String province
+   *     - String country
    */
    public void updatePreparation(User user, UserDTO requestUserDTO) {
       user.setFirstName(requestUserDTO.getFirstName());

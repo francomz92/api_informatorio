@@ -15,7 +15,9 @@ public class UserDTO {
    @Length(max = 25, message = "Máximo 25 caracteres")
    private String country;
 
+
    public UserDTO() {}
+
 
    // Getters
 

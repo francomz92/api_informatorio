@@ -26,7 +26,9 @@ public class Product {
    private LocalDateTime registrationDate;
    private boolean isPublished;
 
+
    public Product() {}
+
 
    // Getters
 
