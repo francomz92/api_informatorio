@@ -11,7 +11,6 @@ public class PurchaseDetailService {
    /*
    *  savePreparation -> prepare data for detail save
    *     - Set unit price
-   *     - Set subtotal
    *  @param PurchaseDetail requestDetail
    * */
    public void savePreparation(PurchaseDetail requestDetail) {

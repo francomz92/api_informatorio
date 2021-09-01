@@ -1,5 +1,7 @@
 package com.actividad_final.api_informatorio.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -12,9 +14,15 @@ public class PurchaseDetail {
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    private Long id;
-   @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = Product.class)
+
+   @ManyToOne
    @JoinColumn(name = "FK_product")
    private Product product;
+   @JsonIgnore
+   @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = Cart.class)
+   @JoinColumn(name = "FK_cart")
+   private Cart cart;
+
    @Positive
    private Integer amount;
    @Transient
@@ -55,6 +63,8 @@ public class PurchaseDetail {
    public void setUnitPrice(BigDecimal unitPrice) {
       this.unitPrice = unitPrice;
    }
+
+   public void setCart(Cart cart) { this.cart = cart; }
 
    // Third Method
 

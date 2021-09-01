@@ -1,11 +1,14 @@
 package com.actividad_final.api_informatorio.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table
@@ -14,6 +17,10 @@ public class User {
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    private Long id;
+
+   @JsonIgnore
+   @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = Cart.class)
+   private List<Cart> carts = new ArrayList<>();
 
    @Length(max = 25, message = "Máximo 25 caracteres")
    private String firstName;
@@ -75,6 +82,8 @@ public class User {
       return country;
    }
 
+   public List<Cart> getCarts() { return carts; }
+
    // Setters
 
    public void setId(Long id) {
@@ -109,7 +118,11 @@ public class User {
       this.province = province;
    }
 
-   public void setCountry(String country) {
-      this.country = country;
-   }
+   public void setCountry(String country) { this.country = country; }
+
+   public void setCarts(List<Cart> carts) { this.carts = carts; }
+
+   // Third Methods
+
+   public void addCart(Cart cart) { this.carts.add(cart); }
 }
