@@ -16,7 +16,7 @@ public class CartService {
 
 
    /*
-    *  savePreparation -> prepare data for cart save
+    *  savePreparation -> prepare data for cart and purchase detail save
     *     - Set detail unit price
     *  @param Cart requestCart
     * */
@@ -25,7 +25,6 @@ public class CartService {
       for (PurchaseDetail detail: requestCart.getDetails()) {
          detail.defaultUnitPrice();
          detail.setCart(requestCart);
-//         purchaseDetailRepository.save(detail);
       }
       user.addCart(requestCart);
    }

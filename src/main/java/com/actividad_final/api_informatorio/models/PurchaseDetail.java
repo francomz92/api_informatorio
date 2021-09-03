@@ -3,12 +3,11 @@ package com.actividad_final.api_informatorio.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
 
 @Entity
+@Table(name = "detail")
 public class PurchaseDetail {
 
    @Id
@@ -22,6 +21,10 @@ public class PurchaseDetail {
    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = Cart.class)
    @JoinColumn(name = "FK_cart")
    private Cart cart;
+   @JsonIgnore
+   @ManyToOne(fetch = FetchType.LAZY, targetEntity = Orden.class)
+   @JoinColumn(name = "FK_order")
+   private Orden orden;
 
    @Positive
    private Integer amount;
@@ -65,6 +68,8 @@ public class PurchaseDetail {
    }
 
    public void setCart(Cart cart) { this.cart = cart; }
+
+   public void setOrder(Orden orden) { this.orden = orden; }
 
    // Third Method
 

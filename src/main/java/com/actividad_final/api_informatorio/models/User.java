@@ -1,5 +1,6 @@
 package com.actividad_final.api_informatorio.models;
 
+import com.actividad_final.api_informatorio.utils.ValidationHelper;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.validator.constraints.Length;
@@ -11,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table
+@Table(name = "user")
 public class User {
 
    @Id
@@ -21,14 +22,17 @@ public class User {
    @JsonIgnore
    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = Cart.class)
    private List<Cart> carts = new ArrayList<>();
+   @JsonIgnore
+   @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = Orden.class)
+   private List<Orden> ordens = new ArrayList<>();
 
    @Length(max = 25, message = "Máximo 25 caracteres")
    private String firstName;
    @Length(max = 25, message = "Máximo 25 caracteres")
    private String lastName;
-   @Email
    @NotNull
    @NotEmpty
+   @Email(regexp = ValidationHelper.EMAIL_REGEX)
    @Length(max = 25, message = "Máximo 25 caracteres")
    @Column(unique = true)
    private String email;
@@ -84,6 +88,8 @@ public class User {
 
    public List<Cart> getCarts() { return carts; }
 
+   public List<Orden> getOrders() { return ordens; }
+
    // Setters
 
    public void setId(Long id) {
@@ -122,7 +128,11 @@ public class User {
 
    public void setCarts(List<Cart> carts) { this.carts = carts; }
 
+   public void setOrders(List<Orden> ordens) { this.ordens = ordens; }
+
    // Third Methods
 
    public void addCart(Cart cart) { this.carts.add(cart); }
+
+   public void addOrder(Orden orden) { this.ordens.add(orden); }
 }

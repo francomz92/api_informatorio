@@ -9,6 +9,7 @@ import com.actividad_final.api_informatorio.repositories.UserRepository;
 import com.actividad_final.api_informatorio.services.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +17,7 @@ import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 @RequestMapping(value = "/api/v1")
 public class CartController {
 
@@ -47,7 +49,7 @@ public class CartController {
       return ResponseEntity.status(HttpStatus.OK).body(user.get().getCarts());
    }
 
-   @PostMapping(value = "/users/{userId}/carts")
+   @PostMapping(value = "/users/{userId}/carts", consumes = MediaType.APPLICATION_JSON_VALUE)
    public ResponseEntity<?> createCart(@PathVariable("userId") Long userId,
                                        @Valid @RequestBody Cart requestCart) {
       Optional<User> user = userRepository.findById(userId);

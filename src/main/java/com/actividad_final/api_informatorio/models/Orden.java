@@ -9,28 +9,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "cart")
-public class Cart {
+@Table(name = "orden")
+public class Orden {
 
    @Id
-   @GeneratedValue(strategy = GenerationType.IDENTITY)
    private Long id;
 
    @ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class)
    @JoinColumn(name = "FK_user")
    private User user;
-   @OneToMany(mappedBy = "cart", fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = PurchaseDetail.class)
+   @OneToMany(mappedBy = "orden", fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = PurchaseDetail.class)
    private List<PurchaseDetail> details = new ArrayList<>();
 
    @CreationTimestamp
-   private LocalDateTime creationDate;
+   private LocalDateTime orderDate;
+   private String observation;
+
    @Transient
    private String customer;
    @Transient
    private BigDecimal total;
 
 
-   public Cart() {}
+   public Orden() {}
 
 
    // Getters
@@ -39,9 +40,11 @@ public class Cart {
 
    public List<PurchaseDetail> getDetails() { return details; }
 
-   public LocalDateTime getCreationDate() { return creationDate; }
+   public LocalDateTime getOrderDate() { return orderDate; }
 
-   public String getCustomer() { return user.getFirstName().concat(" ").concat(user.getLastName()); }
+   public String getObservation() { return observation; }
+
+   public String getCustomer() { return this.user.getFirstName().concat(" ").concat(this.user.getLastName()); }
 
    public BigDecimal getTotal() {
       BigDecimal finalTotal = BigDecimal.ZERO;
@@ -53,19 +56,13 @@ public class Cart {
 
    // Setters
 
-   public void setId(Long id) {
-      this.id = id;
-   }
+   public void setId(Long id) { this.id = id; }
 
-   public void setUser(User user) {
-      this.user = user;
-   }
+   public void setUser(User user) { this.user = user; }
 
-   public void setDetails(List<PurchaseDetail> details) {
-      this.details = details;
-   }
+   public void setDetails(List<PurchaseDetail> details) { this.details = details; }
 
-   public void setCreationDate(LocalDateTime creationDate) {
-      this.creationDate = creationDate;
-   }
+   public void setOrderDate(LocalDateTime orderDate) { this.orderDate = orderDate; }
+
+   public void setObservation(String observation) { this.observation = observation; }
 }
