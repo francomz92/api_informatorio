@@ -3,6 +3,7 @@ package com.actividad_final.api_informatorio.models;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ public class Cart {
    @ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class)
    @JoinColumn(name = "FK_user")
    private User user;
+   @NotNull
    @OneToMany(mappedBy = "cart", fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = PurchaseDetail.class)
    private List<PurchaseDetail> details = new ArrayList<>();
 

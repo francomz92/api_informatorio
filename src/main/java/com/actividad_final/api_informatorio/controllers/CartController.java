@@ -14,10 +14,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 @RequestMapping(value = "/api/v1")
 public class CartController {
 
@@ -37,7 +37,7 @@ public class CartController {
       if (user.isEmpty() || !user.get().getCarts().contains(cart.get())) {
          throw new ResourceNotFound("¡El carrito no existe!");
       }
-      return ResponseEntity.status(HttpStatus.OK).body(cart);
+      return ResponseEntity.ok(cart);
    }
 
    @GetMapping(value = "/users/{userId}/carts")
@@ -46,10 +46,11 @@ public class CartController {
       if (user.isEmpty()) {
          throw new ResourceNotFound("¡El carrito no existe!");
       }
-      return ResponseEntity.status(HttpStatus.OK).body(user.get().getCarts());
+      List<Cart> carts = user.get().getCarts();
+      return ResponseEntity.ok(carts);
    }
 
-   @PostMapping(value = "/users/{userId}/carts", consumes = MediaType.APPLICATION_JSON_VALUE)
+   @PostMapping(value = "/users/{userId}/carts")
    public ResponseEntity<?> createCart(@PathVariable("userId") Long userId,
                                        @Valid @RequestBody Cart requestCart) {
       Optional<User> user = userRepository.findById(userId);
@@ -60,7 +61,7 @@ public class CartController {
       return ResponseEntity.status(HttpStatus.CREATED).body(cartRepository.save(requestCart));
    }
 
-   @PutMapping(value = "/users/{userId}/carts/{cartId}")
+   @PutMapping(value = "/users/{userId}/carts/{cartId}", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE})
    public ResponseEntity<?> updateCart(@PathVariable("userId") Long userId, @PathVariable("cartId") Long cartId,
                                        @Valid @RequestBody CartDTO requestCart) {
       Optional<User> user = userRepository.findById(userId);
@@ -69,7 +70,7 @@ public class CartController {
          throw new ResourceNotFound("¡No se encontró el carrito solicitado!");
       }
       cartService.updatePreparation(cart.get(), requestCart);
-      return ResponseEntity.status(HttpStatus.OK).body(cartRepository.save(cart.get()));
+      return ResponseEntity.ok(cartRepository.save(cart.get()));
    }
 
    @DeleteMapping(value = "/users/{userId}/carts/{cartId}")
@@ -81,6 +82,6 @@ public class CartController {
       }
       user.get().getCarts().remove(cart.get());
       cartRepository.delete(cart.get());
-      return ResponseEntity.status(HttpStatus.OK).build();
+      return ResponseEntity.ok().build();
    }
 }

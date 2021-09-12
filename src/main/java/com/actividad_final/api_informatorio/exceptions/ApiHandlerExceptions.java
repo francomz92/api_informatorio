@@ -18,4 +18,11 @@ public class ApiHandlerExceptions {
    public ApiErrorMessage carritoNotFound(RuntimeException ex, HttpServletRequest request) {
       return new ApiErrorMessage(ex, request.getRequestURI());
    }
+
+   @ResponseStatus(HttpStatus.BAD_REQUEST)
+   @ExceptionHandler(value = BadRequest.class)
+   @ResponseBody
+   public ApiErrorMessage badRequest(RuntimeException ex, HttpServletRequest request) {
+      return new ApiErrorMessage(ex, request.getRequestURI());
+   }
 }

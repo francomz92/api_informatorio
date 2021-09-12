@@ -1,0 +1,614 @@
+{
+	"info": {
+		"_postman_id": "dbcd8d70-2cfa-4ba4-8a88-4933611eea86",
+		"name": "api_informatorio",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "PostNewUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\":\"Homero\",\n    \"lastName\":\"Simpson\",\n    \"email\":\"homero@email.com\",\n    \"password\":\"homero78\",\n    \"city\":\"Springfield\",\n    \"province\":\"Oregón\",\n    \"country\":\"Estados Unidos\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/{{api.v1}}/users",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"{{api.v1}}",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PutUser",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\":\"Homero\",\n    \"lastName\":\"Simpson\",\n    \"password\":\"homero78\",\n    \"city\":\"Springfield\",\n    \"province\":\"NY\",\n    \"country\":\"Estados unidos\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/{{api.v1}}/users/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"{{api.v1}}",
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetOneUser",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{url}}/{{api.v1}}/users/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"{{api.v1}}",
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllUsers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/{{api.v1}}/users",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"{{api.v1}}",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetFilteredUser",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/{{api.v1}}/users?city=Nankatsu",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"{{api.v1}}",
+								"users"
+							],
+							"query": [
+								{
+									"key": "city",
+									"value": "Nankatsu"
+								},
+								{
+									"key": "startDate",
+									"value": "29-08-2021",
+									"disabled": true
+								},
+								{
+									"key": "endDate",
+									"value": "30-08-2021",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteUser",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/{{api.v1}}/users/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"{{api.v1}}",
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "products",
+			"item": [
+				{
+					"name": "PostNewProduct",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Remera del Informatorio\",\n    \"description\": \"Remera mangas cortas con motivo del Informatorio\",\n    \"unitPrice\": 1050,\n    \"body\": \"- 100% Algodón - Talle M/L - Color blanca\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/{{api.v1}}/products",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"{{api.v1}}",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PutProduct",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Taza de Porcelana\",\n    \"description\": \"Taza con motivo del Informatorio\",\n    \"unitPrice\": 1050,\n    \"body\": \"- Color blanca - Capacidad de 250ml\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/{{api.v1}}/products/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"{{api.v1}}",
+								"products",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetOneProduct",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{url}}/{{api.v1}}/products/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"{{api.v1}}",
+								"products",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllProducts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/{{api.v1}}/products",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"{{api.v1}}",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetFilteredProducts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/{{api.v1}}/products?name=short",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"{{api.v1}}",
+								"products"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "short"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetUnpublishedProducts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/{{api.v1}}/products/unpublished",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"{{api.v1}}",
+								"products",
+								"unpublished"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteUser",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/{{api.v1}}/products/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"{{api.v1}}",
+								"products",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "carts",
+			"item": [
+				{
+					"name": "PostNewCart",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"details\": [\n        {\n            \"product\": {\n                \"id\": 1,\n                \"name\": \"Remera del Informatorio\",\n                \"description\": \"Remera mangas cortas con motivo del Informatorio\",\n                \"unitPrice\": 1050,\n                \"body\": \"- 100% Algodón - Talle M/L - Color blanca\",\n                \"registrationDate\": \"2021-09-03T16:15:42.426206\",\n                \"published\": true\n            },\n            \"amount\": 4\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/{{api.v1}}/users/1/carts",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"{{api.v1}}",
+								"users",
+								"1",
+								"carts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PutCart",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"details\": [\n        {\n            \"id\": 1,\n            \"product\": {\n                \"id\": 1,\n                \"name\": \"Short Adidas\",\n                \"description\": \"Atom\",\n                \"unitPrice\": 2500.00,\n                \"body\": \"Mucho texto, como 500 caracteres\",\n                \"registrationDate\": \"2021-08-30T18:39:33\",\n                \"published\": true\n            },\n            \"amount\": 4\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/{{api.v1}}/users/1/carts/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"{{api.v1}}",
+								"users",
+								"1",
+								"carts",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllCarts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/{{api.v1}}/users/1/carts",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"{{api.v1}}",
+								"users",
+								"1",
+								"carts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetOneCart",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/{{api.v1}}/users/1/carts/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"{{api.v1}}",
+								"users",
+								"1",
+								"carts",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteCart",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/{{api.v1}}/users/1/carts/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"{{api.v1}}",
+								"users",
+								"1",
+								"carts",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "orders",
+			"item": [
+				{
+					"name": "PostNewOrder",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cart\": {\n        \"id\": 1,\n        \"details\": [\n            {\n                \"id\": 1,\n                \"amount\": 4,\n                \"subtotal\": 4200.00,\n                \"unitPrice\": 1050.00,\n                \"product\": {\n                    \"id\": 1,\n                    \"name\": \"Remera del Informatorio\",\n                    \"description\": \"Remera mangas cortas con motivo del Informatorio\",\n                    \"unitPrice\": 1050.00,\n                    \"body\": \"- 100% Algodón - Talle M/L - Color blanca\",\n                    \"registrationDate\": \"2021-08-31T22:20:53\",\n                    \"published\": true\n                }\n            }\n        ],\n        \"creationDate\": \"2021-08-31T22:21:10\",\n        \"customer\": \"Homero Simpson\",\n        \"total\": 4200.00\n    },\n    \"observation\": \"un texto largo, como de 200 caracteres\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/{{api.v1}}/users/1/ordens",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"{{api.v1}}",
+								"users",
+								"1",
+								"ordens"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PutOrder",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"details\": [\n        {\n            \"id\": 1,\n            \"product\": {\n                \"id\": 1,\n                \"name\": \"Short Adidas\",\n                \"description\": \"Atom\",\n                \"unitPrice\": 2500.00,\n                \"body\": \"Mucho texto, como 500 caracteres\",\n                \"registrationDate\": \"2021-08-30T18:39:33\",\n                \"published\": true\n            },\n            \"amount\": 4\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/{{api.v1}}/users/1/ordens/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"{{api.v1}}",
+								"users",
+								"1",
+								"ordens",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllOrders",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/{{api.v1}}/users/1/ordens",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"{{api.v1}}",
+								"users",
+								"1",
+								"ordens"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetOneOrder",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/{{api.v1}}/users/1/ordens/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"{{api.v1}}",
+								"users",
+								"1",
+								"ordens",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteOrder",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/{{api.v1}}/users/1/ordens/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"{{api.v1}}",
+								"users",
+								"1",
+								"ordens",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "localhost:8080"
+		},
+		{
+			"key": "api.v1",
+			"value": "api/v1"
+		}
+	]
+}

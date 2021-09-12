@@ -14,8 +14,8 @@ public class PurchaseDetail {
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    private Long id;
 
-   @ManyToOne
-   @JoinColumn(name = "FK_product")
+   @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST, targetEntity = Product.class)
+   @JoinColumn(name = "FK_product", nullable = false)
    private Product product;
    @JsonIgnore
    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = Cart.class)

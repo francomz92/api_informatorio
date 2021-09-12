@@ -17,8 +17,7 @@ import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
-@RequestMapping(value = "/api/v1", consumes = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/v1")
 public class OrdenController {
 
    @Autowired
@@ -31,17 +30,17 @@ public class OrdenController {
 
    @GetMapping(value = "/users/{userId}/ordens")
    public ResponseEntity<?> getOrders(@PathVariable("userId") Long userId) {
-      return ResponseEntity.status(HttpStatus.OK).body(ordenRepository.findAll());
+      return ResponseEntity.ok(ordenRepository.findAll());
    }
 
    @GetMapping(value = "/users/{userId}/ordens/{orderId}")
    public ResponseEntity<?> getOrder(@PathVariable("userId") Long userId, @PathVariable("orderId") Long orderId) {
       Optional<User> user = userRepository.findById(userId);
       Optional<Orden> order = ordenRepository.findById(orderId);
-      if (user.isEmpty() || order.isEmpty() || !user.get().getOrders().contains(order.get())) {
+      if (user.isEmpty() || order.isEmpty() || !user.get().getOrdens().contains(order.get())) {
          throw new ResourceNotFound("¡Los datos de la compra no coinciden!");
       }
-      return ResponseEntity.status(HttpStatus.OK).body(order);
+      return ResponseEntity.ok(order);
    }
 
    @PostMapping(value = "/users/{userId}/ordens")
@@ -54,25 +53,26 @@ public class OrdenController {
       return ResponseEntity.status(HttpStatus.CREATED).body(ordenRepository.save(orden));
    }
 
-   @PutMapping(value = "/users/{userId}/oreders/{orderId}")
+   @PutMapping(value = "/users/{userId}/ordens/{orderId}", consumes = MediaType.APPLICATION_JSON_VALUE)
    public ResponseEntity<?> updateOrder(@PathVariable("userId") Long userId, @PathVariable("orderId") Long orderId, @Valid @RequestBody OrdenDTO ordenDTO) {
       Optional<User> user = userRepository.findById(userId);
       Optional<Orden> order = ordenRepository.findById(orderId);
-      if (user.isEmpty() || order.isEmpty() || !user.get().getOrders().contains(order.get())) {
+      if (user.isEmpty() || order.isEmpty() || !user.get().getOrdens().contains(order.get())) {
          throw new ResourceNotFound("¡No existe el recurso solicitado!");
       }
-      return ResponseEntity.status(HttpStatus.OK).body(order);
+      return ResponseEntity.ok(order);
    }
 
    @DeleteMapping(value = "/users/{userId}/ordens/{orderId}")
    public ResponseEntity<?> deleteOrder(@PathVariable("userId") Long userId, @PathVariable("orderId") Long orderId) {
       Optional<User> user = userRepository.findById(userId);
       Optional<Orden> order = ordenRepository.findById(orderId);
-      if (user.isEmpty() || order.isEmpty() || !user.get().getOrders().contains(order.get())) {
+      if (user.isEmpty() || order.isEmpty() || !user.get().getOrdens().contains(order.get())) {
          throw new ResourceNotFound("¡No existe el recurso solicitado!");
       }
-      ordenRepository.deleteById(orderId);
-      return ResponseEntity.status(HttpStatus.OK).build();
+      user.get().getOrdens().remove(order.get());
+      ordenRepository.delete(order.get());
+      return ResponseEntity.ok().build();
    }
 
 }

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Prueba Fetch</title>
+   <link rel="stylesheet" href="css/index.header.css">
+   <link rel="stylesheet" href="css/index.cardsContainer.css">
+</head>
+
+<body>
+
+   <header class="header">
+      <nav class="header__nav">
+         <p class="user">Franco</p>
+         <button id="cart"></button>
+      </nav>
+   </header>
+
+   <div id="cards-container"></div>
+   
+   <template id="card-template">
+      <div class="card">
+         <h5 class="card__title"></h5>
+         <p class="card__description"></p>
+         <div class="price-section">
+            <span class="card__price"></span>
+            <button class="card__button" data-id="">Agregar</button>
+         </div>
+      </div>
+   </template>
+
+   <script src="js/index.productsCards.js" type="application/javascript"></script>
+   <script src="js/index.cartList.js" type="application/javascript"></script>
+</body>
+</html>

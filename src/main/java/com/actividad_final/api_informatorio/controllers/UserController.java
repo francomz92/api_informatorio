@@ -7,7 +7,6 @@ import com.actividad_final.api_informatorio.repositories.UserRepository;
 import com.actividad_final.api_informatorio.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,8 +14,7 @@ import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
-@RequestMapping(value = "/api/v1", consumes = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/v1")
 public class UserController {
 
    @Autowired

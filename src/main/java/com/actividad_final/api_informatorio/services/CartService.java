@@ -1,18 +1,24 @@
 package com.actividad_final.api_informatorio.services;
 
 import com.actividad_final.api_informatorio.dto.CartDTO;
+import com.actividad_final.api_informatorio.exceptions.BadRequest;
 import com.actividad_final.api_informatorio.models.Cart;
+import com.actividad_final.api_informatorio.models.Product;
 import com.actividad_final.api_informatorio.models.PurchaseDetail;
 import com.actividad_final.api_informatorio.models.User;
+import com.actividad_final.api_informatorio.repositories.ProductRepository;
 import com.actividad_final.api_informatorio.repositories.PurchaseDetailRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 @Service
 public class CartService {
 
    @Autowired
    private PurchaseDetailRepository purchaseDetailRepository;
+   @Autowired
+   private ProductRepository productRepository;
 
 
    /*
@@ -21,11 +27,16 @@ public class CartService {
     *  @param Cart requestCart
     * */
    public void savePreparation(User user, Cart requestCart) {
-      requestCart.setUser(user);
       for (PurchaseDetail detail: requestCart.getDetails()) {
+         Product product = productRepository.findById(detail.getFK_product().getId()).orElse(null);
+         if (product == null) {
+            throw new BadRequest("¡Información dañada!");
+         }
+         detail.setProduct(product);
          detail.defaultUnitPrice();
          detail.setCart(requestCart);
       }
+      requestCart.setUser(user);
       user.addCart(requestCart);
    }
 

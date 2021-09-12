@@ -88,7 +88,7 @@ public class User {
 
    public List<Cart> getCarts() { return carts; }
 
-   public List<Orden> getOrders() { return ordens; }
+   public List<Orden> getOrdens() { return ordens; }
 
    // Setters
 
@@ -128,7 +128,7 @@ public class User {
 
    public void setCarts(List<Cart> carts) { this.carts = carts; }
 
-   public void setOrders(List<Orden> ordens) { this.ordens = ordens; }
+   public void setOrdens(List<Orden> ordens) { this.ordens = ordens; }
 
    // Third Methods
 

@@ -1,17 +1,19 @@
 package com.actividad_final.api_informatorio.services;
 
 import com.actividad_final.api_informatorio.dto.ProductDTO;
+import com.actividad_final.api_informatorio.models.Cart;
 import com.actividad_final.api_informatorio.models.Product;
-import com.actividad_final.api_informatorio.models.PurchaseDetail;
-import com.actividad_final.api_informatorio.repositories.PurchaseDetailRepository;
+import com.actividad_final.api_informatorio.repositories.CartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ProductService {
 
    @Autowired
-   private PurchaseDetailRepository purchaseDetailRepository;
+   private CartRepository cartRepository;
 
    /*
    *  updateProduct -> prepare date for product update
@@ -31,11 +33,28 @@ public class ProductService {
       if (requestProductDTO.isPublished()) {
          product.setPublished(true);
       }
-      updatePurchaseDetail();
+      productRelationsChecker(product);
    }
 
-   public void updatePurchaseDetail() {
-      Iterable<PurchaseDetail> details = purchaseDetailRepository.findAll();
-      details.forEach(PurchaseDetail::defaultUnitPrice);
+   /*
+    *  productRelationsChecker -> check and update only carts products
+    *  @param Product product
+    * */
+   public void productRelationsChecker(Product product) {
+      List<Cart> carts = cartRepository.findAll();
+      for (Cart cart: carts) {
+         cart.getDetails().forEach(detail -> {
+            if (detail.getFK_product().getId() == product.getId()) {
+               detail.getFK_product().setName(product.getName());
+               detail.getFK_product().setUnitPrice(product.getUnitPrice());
+               detail.getFK_product().setDescription(product.getDescription());
+               detail.getFK_product().setBody(product.getBody());
+               if (product.isPublished()) {
+                  detail.getFK_product().setPublished(true);
+               }
+               detail.defaultUnitPrice();
+            }
+         });
+      }
    }
 }
